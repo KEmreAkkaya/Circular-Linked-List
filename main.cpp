@@ -5,7 +5,7 @@
 
 using namespace std;
 
-
+//Yapı oluşturma
 struct n {
 	int x;
 	n *next;
@@ -13,10 +13,10 @@ struct n {
 
 
 };
-typedef struct n node;
-
+typedef struct n node; // "struct node" ifadesini kısaca "node" şekline çevirdi. 
+//Ekle fonksiyonu
 node * ekle(node * r, int x) {
-	
+	//Eğer root yoksa yeni düğüm yarat ve next ini kendine dönder.
 	if (r == NULL)
 	{
 		r = (node *)malloc(sizeof(node));
@@ -26,8 +26,9 @@ node * ekle(node * r, int x) {
 
 
 	}
+	//Eğer 1 tane düğüm varsa,sonraki eklenecek düğüm ya öncesine ya sonrasına eklenecek.
 	else if (r->next == r)
-	{
+	{   //Eğer eklenecek düğüm, ilk düğümden küçükse gerekli işlemleri yap.root u değiştir.
 		if (r->x >= x)
 		{
 			node * temp = (node *)malloc(sizeof(node));
@@ -38,6 +39,7 @@ node * ekle(node * r, int x) {
 			return r;
 
 		}
+		//Eğer eklenecek düğüm ,ilk düğümden büyükse gerekl işlemleri yap.root sabit.
 		else
 		{
 			node * temp = (node *)malloc(sizeof(node));
@@ -47,6 +49,8 @@ node * ekle(node * r, int x) {
 			return r;
 		}
 	}
+	//Bundan sonraki işlemler önceki 2 düğüm ile karşılaştırma yapıp ,düğümü sıralı şekilde diz mantığına dayanıyor.
+	//Daha sonra oluşturlacak olan düğümlerle de karşılaştırma yapmaktadır. 
 	node *iter = r;
 	if (r->next != r) 
 	{
