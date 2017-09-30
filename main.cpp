@@ -16,13 +16,13 @@ struct n {
 typedef struct n node;
 
 node * ekle(node * r, int x) {
-	node * c = NULL;
+	
 	if (r == NULL)
 	{
 		r = (node *)malloc(sizeof(node));
 		r->x = x;
 		r->next = r;
-		c = r;
+		
 
 
 	}
@@ -117,9 +117,8 @@ void yazdir(node *r)
 int main()
 {
 	node *root;
-	node *cursor;
 	root = NULL;
-	cursor = NULL;
+	
 	root = ekle(root, 10);
 	root = ekle(root, 15);
 	root = ekle(root, 13); 
