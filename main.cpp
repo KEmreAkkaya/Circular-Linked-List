@@ -106,6 +106,36 @@ node * ekle(node * r, int x) {
 
 
 }
+//Silme fonksiyonu
+node * sil(node * r, int x)
+{
+	node * temp;
+	node * iter = r;
+	//eğer silenecek eleman ilk elemans(rootsa yada ) ve tek düğüm değilse
+	if (r->x == x)
+	{      //sondaki roota giden düğümü silinen düğümden sonraki düğüme bağlama
+		while (iter->next != r)
+		{
+			iter = iter->next;
+		}
+		iter->next = r->next;
+		free(r);
+
+		return iter->next;
+
+
+	}
+	//aradığımız düğüm yoksa ilerlet
+	while (iter->next != r && iter->next->x != x) {
+		iter = iter->next;
+	}
+	//varsa aşağıdaki gerekli işlemleri uygula
+	temp = iter->next;
+	iter->next = iter->next->next;
+	free(temp);
+	return r;
+}
+
 void yazdir(node *r)
 {
 	node * iter = r;
@@ -120,15 +150,16 @@ void yazdir(node *r)
 }
 int main()
 {
+	setlocale(LC_ALL, "Turkish");
 	node *root;
 	root = NULL;
-	
+
 	root = ekle(root, 10);
 	root = ekle(root, 15);
-	root = ekle(root, 13); 
+	root = ekle(root, 13);
 	root = ekle(root, 9);
 	root = ekle(root, 11);
-	root = ekle(root, 17); 
+	root = ekle(root, 17);
 	root = ekle(root, 18);
 	root = ekle(root, 8);
 	root = ekle(root, 12);
@@ -137,6 +168,21 @@ int main()
 	root = ekle(root, 1);
 	root = ekle(root, 6);
 	root = ekle(root, 7);
+	yazdir(root);
+
+	root = sil(root, 10);
+	root = sil(root, 15);
+	root = sil(root, 13);
+	root = sil(root, 1);
+	root = sil(root, 11);
+	root = sil(root, 18);
+	
+
+	yazdir(root);
+
+	root = ekle(root, 19);
+	yazdir(root);
+	root = ekle(root, 1);
 	yazdir(root);
 	system("pause");
 	return 0;
